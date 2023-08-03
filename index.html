@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geolocation Project</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>
@@ -14,7 +15,7 @@
    crossorigin=""></script>
     <style>
     #map { 
-        height: 400px;
+        height: 800px;
         background-color: #ccc;
     }
     #map::before{
@@ -28,21 +29,79 @@
     .leaflet-popup-content-wrapper {
         width: 100%;
     }
+    .row{
+
+        background-color: bisque;
+    }
+
+    .square-image {
+    object-fit: cover;
+    width: 100%;
+    height: 200px; 
+}
+    
   </style>
 </head>
 <body>
-    <form>
-        <select id="business">
-            <option value="Gas">Restaurants</option>
-            <option value="coffee">Coffee Shops</option>
-            <option value="hotel">Hotels</option>
-            <option value="market">Markets</option>
-        </select>
-        <button id="submit">Submit</button>
-
-        <input type="text" id="businessName" placeholder="Enter business name">
-        <button id="businessSubmit">Submit</button>
-    </form>
+    <!-- Begin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Travel Agency</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <select class="custom-select" id="business">
+                        <option value="Gas">Restaurants</option>
+                        <option value="coffee">Coffee Shops</option>
+                        <option value="hotel">Hotels</option>
+                        <option value="market">Markets</option>
+                    </select>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-primary ml-2" id="submit">Submit</button>
+                </li>
+                <li class="nav-item">
+                    <input class="form-control ml-2" type="text" id="businessName" placeholder="Enter business name">
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-primary ml-2" id="businessSubmit">Submit</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End Navbar -->
     <div id="map"></div>
+<!-- Images -->
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="https://www.salamair.com/images/des/Destinations%20%20%20square%20_Riyadh.jpg" class="img-fluid mb-4" alt="Destination 1">
+            <img src="https://th.bing.com/th/id/OIP.oMD600KnzYr95OM9yzLDTwHaEt?pid=ImgDet&rs=1" class="img-fluid" alt="Destination 2">
+        </div>
+        <div class="col-md-4">
+            <img src="https://texashillcountry.com/wp-content/uploads/17203146_10155174377319939_9012433348455317070_n-660x400.jpg" class="img-fluid mb-4" alt="Destination 3">
+            <img src="https://foundtheworld.com/wp-content/uploads/2015/12/Times-Square-New-York-4.jpg" class="img-fluid" alt="Destination 4">
+        </div>
+        <div class="col-md-4">
+            <img src="https://ilarge.lisimg.com/image/7576946/1118full-the-square-screenshot.jpg" class="img-fluid mb-4" alt="Destination 5">
+            <img src="https://destinationsunknown.com/wp-content/uploads/2013/12/timessquare-0004.jpg" class="img-fluid" alt="Destination 6">
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Footer -->
+    <footer class="footer bg-light py-3">
+        <div class="container text-center">
+            <span class="text-muted">&copy; 2023 Travel Agency. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

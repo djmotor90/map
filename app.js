@@ -27,7 +27,7 @@ const myMap = {
 			let clickedMarker = L.marker(e.latlng, {
 				icon: L.icon({
 					iconUrl: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-					iconSize: [35, 41],
+					iconSize: [41, 41],
 					iconAnchor: [12, 41],
 				})
 			}).addTo(this.map);
@@ -49,18 +49,17 @@ const myMap = {
 	},
 
 	// Add business marker
-	addBusinessMarker(businessName) {
-		// Assumes that this.coordinates holds the coordinates where the marker should be added
-		const marker = L.marker(this.coordinates, {
-			icon: L.icon({
-				iconUrl: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-				iconSize: [25, 41],
-				iconAnchor: [12, 41],
-			})
-		}).addTo(this.map);
+addBusinessMarker(businessName, coords) {
+	const marker = L.marker(coords, {
+		icon: L.icon({
+			iconUrl: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+			iconSize: [41, 41],
+			iconAnchor: [12, 41],
+		})
+	}).addTo(this.map);
 
-		marker.bindPopup(businessName).openPopup();
-	}
+	marker.bindPopup(businessName).openPopup();
+}
 }
 
 // get coordinates via geolocation api
@@ -77,7 +76,7 @@ async function getFoursquare(business) {
 		method: 'GET',
 		headers: {
 		Accept: 'application/json',
-		Authorization: 'fsq3ATzZbmcGhdeFafr73wZcnJ+LlN6bK+4dh19a7ClS4u8='
+		Authorization: 'fsq3pgMKgM+B/2NKnnQVucldbWH1hs784ompXIyLcTYqMpc='
 		}
 	}
 	let limit = 5
@@ -120,8 +119,16 @@ document.getElementById('submit').addEventListener('click', async (event) => {
 })
 
 // business name submit button
-document.getElementById('businessSubmit').addEventListener('click', (event) => {
+document.getElementById('businessSubmit').addEventListener('click', async (event) => {
 	event.preventDefault()
 	let businessName = document.getElementById('businessName').value
-	myMap.addBusinessMarker(businessName)
+	let data = await getFoursquare(businessName)
+	myMap.businesses = processBusinesses(data)
+	if (myMap.businesses.length > 0) {
+		// Assumes the first returned business is the correct one
+		let business = myMap.businesses[0]
+		myMap.addBusinessMarker(business.name, [business.lat, business.long])
+	} else {
+		console.log('No businesses found with the specified name')
+	}
 })
